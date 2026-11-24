@@ -1,0 +1,23 @@
+{
+  "name": "rezero-replica",
+  "version": "1.0.0",
+  "description": "A local visual replica of the Re:Zero mdBook landing page.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "sync": "node scripts/sync-offline.js",
+    "build:search": "node scripts/build-search-index.js",
+    "capture": "node scripts/capture.js",
+    "test": "node scripts/verify.js",
+    "test:offline": "node scripts/verify-offline.js"
+  },
+  "keywords": [
+    "mdbook",
+    "rezero",
+    "website-replica"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "puppeteer-core": "23.11.1"
+  }
+}

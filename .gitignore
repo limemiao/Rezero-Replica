@@ -1,0 +1,7 @@
+node_modules/
+qa/
+site/
+
+# 本地配置与运行时数据
+*.log
+.env

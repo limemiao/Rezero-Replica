@@ -1,0 +1,180 @@
+/* ── 1. 宽屏布局 ──────────────────────────────────────────────────────
+   覆盖 mdBook 默认的 750px 窄屏居中布局
+   --content-max-width 同时控制 general.css 和 chrome.css 里的三处 max-width
+─────────────────────────────────────────────────────────────────────── */
+:root {
+    --content-max-width: 92%;
+}
+
+/* 宽屏时给正文增加一点内边距，防止贴着侧栏 */
+.content main {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* ── 2. 正文字号 ──────────────────────────────────────────────────────
+   小四号 = 12pt，在 96 DPI 屏幕上约等于 18px
+   同时调大行高，提升中文长篇阅读舒适度
+─────────────────────────────────────────────────────────────────────── */
+.content main {
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+/* ── 3. 文章页尾打赏区 ─────────────────────────────────────────────────── */
+.donation-footer {
+    margin: 72px auto 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--table-border-color);
+    text-align: center;
+}
+
+.donation-footer__title {
+    margin: 0 0 8px;
+    color: var(--fg);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.donation-footer__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+    min-height: 34px;
+    margin-bottom: 34px;
+    padding: 0 18px;
+    border-radius: 5px;
+    background: hsl(170.64deg 100% 50%);
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.donation-footer__button:hover {
+    background: #d92d20;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.donation-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 170px));
+    justify-content: center;
+    gap: 34px 56px;
+}
+
+.donation-footer__item {
+    margin: 0;
+}
+
+.donation-footer__image {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.donation-footer__label {
+    margin-top: 10px;
+    color: var(--fg);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+    .donation-footer {
+        margin-top: 48px;
+    }
+
+    .donation-footer__grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 26px 22px;
+    }
+}
+
+@media print {
+    .donation-footer {
+        display: none;
+    }
+}
+
+/* PC 端限制小说封面与正文插图宽度，移动端沿用全宽显示。 */
+@media screen and (min-width: 761px) {
+    .content main img[src*="res/imgs/article/"] {
+        display: block;
+        max-width: 40%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Offline-replica notice. It stays out of the initial layout and only appears
+   when a chapter link is opened without the source site's chapter payloads. */
+.chapter-notice {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: min(560px, calc(100vw - 32px));
+    padding: 14px 16px;
+    border: 1px solid var(--theme-popup-border);
+    border-radius: 6px;
+    background: var(--theme-popup-bg);
+    box-shadow: 0 10px 32px rgb(0 0 0 / 18%);
+    color: var(--fg);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.chapter-notice--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.chapter-notice__message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.chapter-notice__link {
+    flex: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chapter-notice__close {
+    align-self: flex-start;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--icons);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .chapter-notice {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .chapter-notice__message {
+        width: calc(100% - 32px);
+    }
+}
