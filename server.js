@@ -6,7 +6,7 @@ const { URL } = require("url");
 const requestedRoot = process.env.SERVE_ROOT
   ? path.resolve(__dirname, process.env.SERVE_ROOT)
   : path.join(__dirname, "site");
-const root = fs.existsSync(requestedRoot) ? requestedRoot : __dirname;
+const root = fs.existsSync(requestedRoot) ? requestedRoot : path.join(__dirname, "public");
 const port = Number(process.env.PORT || 4173);
 const host = process.env.HOST || "127.0.0.1";
 

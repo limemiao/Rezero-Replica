@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../public");
 const source = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const sandbox = { window: {} };
 
